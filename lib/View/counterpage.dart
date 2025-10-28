@@ -11,22 +11,31 @@ class CounterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<CounterBloc>();
     return Scaffold(
-      appBar: AppBar(title: Text("Counter")),
-      body: Column(
-        children: [
-          BlocBuilder<CounterBloc, CounterState>(
-            builder: (_, state) {
-              final count = (state as CounterValue).count;
-              return Text('$count', style: TextStyle(fontSize: 48));
-            },
-          ),
-          TextButton(
-            onPressed: () => bloc.add(Increment()),
-            child: Icon(Icons.add),
-          ),
-          SizedBox(height: 10),
-          TextButton(onPressed: () => bloc.add(Decrement()), child: Text("-")),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("Counter", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            SizedBox(height: 25),
+            BlocBuilder<CounterBloc, CounterState>(
+              builder: (_, state) {
+                final count = (state as CounterValue).count;
+                return Text('$count', style: TextStyle(fontSize: 48));
+              },
+            ),
+            SizedBox(height: 20),
+            TextButton(
+              onPressed: () => bloc.add(Increment()),
+              child: Icon(Icons.add, size: 32),
+            ),
+            SizedBox(height: 10),
+            TextButton(
+              onPressed: () => bloc.add(Decrement()),
+              child: Icon(Icons.remove, size: 32),
+            ),
+          ],
+        ),
       ),
     );
   }
